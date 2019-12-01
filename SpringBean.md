@@ -4,7 +4,7 @@ Spring Bean
 Bean的生命周期  
 ----------  
 
-![](https://github.com/zhangdberic/spring/blob/master/doc/1528637-20181105211348802-396856434.png)
+![](https://github.com/zhangdberic/spring/blob/master/doc/SpringBean1.jpg)
 
 正如你所见，在Bean 准备就绪之前，Bean 工厂执行了若干启动步骤。我们对图1.5进行详细描述。
 
