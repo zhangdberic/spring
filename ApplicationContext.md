@@ -15,8 +15,8 @@ XmlWebApplicationContext：从Web应用下的一个或多个XML配置文件加�
 例如：使用JavaConfig方式加载Spring应用上下文，
 ```java  
 ApplicationContext context = new AnnotationConfigApplicationContext(com.sc.config.ApplicationConfig.class);
-```  
-这个com.sc.config.ApplicationConfig类声明为@Configuration源注释（配置类）
+```
+这个com.sc.config.ApplicationConfig类声明为@Configuration源注释（配置类），也可以由多个@Configuration源注释声明的类数组
 
 
 
