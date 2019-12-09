@@ -194,7 +194,7 @@ public class AppConfig{
 
 基于@Component方式，可以使用@Autowired注入。基于@Bean方式，可以使用JavaConfig本地方法和参数引用注入。当然可以混合使用两种方式，来注入，例如：使用@Bean创建的SpringBean，使用@Autowired来注入、使用@Component声明的SpringBean，使用JavaConfig的本地方法和参数引用来注入。
 
-### 2.1 @Autowired+@Qualifier
+### 2.1 @Autowired
 
 #### 2.1.1 @Autowired
 
@@ -223,20 +223,53 @@ public class UserService {
 }
 ```
 
-#### 2.1.2 @Qualifier
+#### 2.1.2 解决歧义性
+
+如果有多bean能够匹配，这种歧义性会阻碍Spring自动装配性。
+
+例如：一个接口多个bean实现
+
+```java
+@Autowired
+private void setDessert(Dessert dessert){
+    this.dessert = dessert;
+}
+
+@Component
+public class Cake implements Dessert {...}
+@Component
+public class Cookie implements Dessert {...}
+@Component
+public class IceCream implements Dessert {...}
+
+```
+
+因为三个Bean都实现了Dessert，当Spring试图装配setDessert()中的Dessert参数时，不是唯一，有歧义可选性，Spring会抛出NoUnqiueBeanDefinitionException异常。
+
+#### 2.1.2.1 @Qualifier
 
 如果有两个相同类(相同的Class)，创建了两个SpringBean，而@Autowired要依赖于其中的一个，那么就要显示的使用@Qualifier("xxx")来声明依赖其中一个。
 
 @Qualifier("bean名称")
 
 ```java
+    @Autowired
+    @Qualifier("cookie")
+    private void setDessert(Dessert dessert){
+        this.dessert = dessert;
+    }
+```
+
+例如：@Qualifier("cookie")，这里显示的制定了使用cookie的springBean。
+
+#### 2.1.2.2 @Primary
+
+@Autowired+@Qualifier配合指定装配的SpringBean名称，@Component+@Primary配合指定了在出现多种可装配的SpringBean，也就是发现歧义性的时候，默认使用哪个SpringBean。
+
+```java
 @Component
-public class UserService {
-    // 基于属性方式注射Bean
-    @Autowired 
-    @Qualifier("userLogic1")
-    private UserLogic userLogic;
-}
+@Primary
+public class Cookie implements Dessert {...}
 ```
 
 
