@@ -160,7 +160,7 @@ import com.spring.javaconfig.springbean;
 
 @RunWith(SpringJunit4ClassRunner.class)
 @ContextConfiguration(class=BeanConfig.class)
-public class UserLogic {
+public class TestUserLogic {
     @Autowired
     private UserLogic userLogic;
     
