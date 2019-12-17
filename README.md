@@ -11,4 +11,5 @@ Spring  文档
 
 [JavaConfig @Conditional](Conditional%20bean.md)，JavaConfig的条件源注释，只有在条件成立的时候才创建SpringBean。
 
-[Spring aop(面向切面)](SpringAop.md)
+[Spring aop(面向切面)](SpringAop.md)，一个简单的AOP例子，@Aspect(切面)、@PointCut(切点)、通知@Before、@After、@AfterRunning、@AfterThrowing、@Around。
+

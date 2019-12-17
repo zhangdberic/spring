@@ -119,7 +119,7 @@ Spring借助AspectJ的切点表达式语言来定义Spring切面。
 | @within()   | 限制连接点匹配指定注解标注的类型（当使用spring AOP时，方法定义在由指定的注解所标注的类里） |
 | @annotation | 限制匹配带有指定注解的连接点                                 |
 
-注意：**只有execution指示器是实际执行的，而其他的指示器都是用来限制匹配的。**也就说只有execution匹配的切点才能被通知处理(拦截)，而其它的执行器只是起到限制的作用，如果限制不成立，则这个表达式无效，execution匹配的切点无效。看下面，2.2.2和2.2.3的例子说明。
+注意：**只有execution指示器是实际执行的，而其他的指示器都是用来限制匹配的。**也就说只有execution匹配的切点才能被通知处理(拦截)，而其它的执行器只是起到限制条件的作用，如果限制条件不成立，则这个表达式无效，execution匹配的切点也就无效。看下面，2.2.2和2.2.3的例子说明。
 
 ### 2.2 例子
 
@@ -159,12 +159,12 @@ and bean('woodstock')，同上，也是限制的作用(这个条件必须成)，
 
 ```java
 @Aspect
-public class Audience {
-    @execution("* concert.Performance.perform(..))")
+public class Audience { // 切面
+    @PointCut("execution(* concert.Performance.perform(..))")  // 切点
     public void performance(){}
     
     @Around("performance()")
-    public void watchPerformance(ProceedingJoinPoint jp){
+    public void watchPerformance(ProceedingJoinPoint jp){ // 通知
         System.out.println("Before handle.")
         try{
             jp.proceed();
@@ -191,7 +191,7 @@ public class TrackCounter {
     public void trackPlayed(int trackNumber){}
     
     @Before("trackPlayed(trackNumber)")
-    public void before(int trackNumber) {
+    public void before(int trackNumber) { // 拦截方法的参数，也会传递到通知方法中
         System.out.println("track number:"+trackNumber);
     }
     

@@ -56,9 +56,9 @@ public class BeanConfig {
 
 也可以配置@ComponentScan源注释，扫描指定包，例如：
 
-@ComponentScan(backPackage={"com.sc.logic","com.sc.controller"}) #  扫描指定包名下的@Component类
+@ComponentScan(basePackage={"com.sc.logic","com.sc.controller"}) #  扫描指定包名下的@Component类
 
-@ComponentScan(backPackageClasses={Logic.class,Controller.class}) # 扫描类所在包下的@Component类，例如：会扫描Logic.class所在的包和Controller.class所在包，在实际开发中，可以创建类空标记接口类，专门用于bean扫描。
+@ComponentScan(basePackageClasses={Logic.class,Controller.class}) # 扫描类所在包下的@Component类，例如：会扫描Logic.class所在的包和Controller.class所在包，在实际开发中，可以创建类空标记接口类，专门用于bean扫描。
 
 #### 1.1.3 AnnotationConfigApplicationContext
 
